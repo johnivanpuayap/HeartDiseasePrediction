@@ -23,6 +23,13 @@ feature_labels = {
     "slope": "What is the slope of the peak exercise ST segment? (Upsloping, Flat, Downsloping) ",
 }
 
+
+st.title('Heart Disease Predictor')
+
+st.write("""
+Welcome to the Heart Disease Predictor! This tool uses machine learning to assess the risk of heart disease based on your symptoms. Simply fill out the form below and click "Predict" to get your result.
+""")
+
 input_values = []
 
 # Collect input values
@@ -67,8 +74,8 @@ slope_map = {"upsloping": 1, "flat": 2, "downsloping": 3}
 slope = slope_map.get(input_values[feature_labels.index("slope")])
 converted_values.append(slope)
 # Perform prediction when the user clicks the button
-if st.button('Predict'):
-    # Convert input_values to numpy array and reshape
+if st.button('Predict Heart Disease'):
+    # Convert input_values to a numpy array and reshape
     input_data = np.array(input_values)
     
     # Make prediction
@@ -76,6 +83,6 @@ if st.button('Predict'):
     
     # Display prediction result
     if prediction == 0:
-        st.header("No Disease Detected")
+        st.success("No signs of heart disease were detected based on the provided information.")
     elif prediction == 1:
-        st.header("You have a High Risk of Disease")
+        st.error("Heart disease was detected based on the provided information.")

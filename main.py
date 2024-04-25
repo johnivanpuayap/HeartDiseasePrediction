@@ -8,6 +8,7 @@ from keras.callbacks import EarlyStopping
 from sklearn.model_selection import train_test_split, GridSearchCV
 from scikeras.wrappers import KerasClassifier
 from sklearn.metrics import classification_report
+import pickle
 
 dataset = pd.read_csv('heart_statlog_cleveland_hungary_final.csv');
 
@@ -59,3 +60,10 @@ y_pred = grid_search.predict(X_test)
 # Generate and print the classification report
 report = classification_report(y_test, y_pred)
 print(report)
+
+
+# After model training and grid search
+best_model = grid_search.best_estimator_.model
+
+with open("heart_disease_predictor.pkl", "wb") as f:
+    pickle.dump(best_model, f)
